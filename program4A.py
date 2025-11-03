@@ -18,8 +18,40 @@ def program4A(n: int, k: int, values: List[int]) -> Tuple[int, List[int]]:
     # Add you code here
     ############################
 
-    return 0, [1, 2, 3] # replace with your code
+    memo = [-1] * n # Stores previous computations, include sum and vaults used
+    res = tuple() # Stores max result as tuple
 
+    if n == 0:
+        return 0, []
+
+    def backtrack(i):
+        nonlocal memo
+        nonlocal res
+        if i >= n:
+            return 0
+        if memo[i] != -1: # Short circuit to return previous sum if already computed
+            return memo[i]
+
+        take, indices = values[i], []
+        for j in range(0, i - k + 1): # Loop through all previous computations to find max
+            if memo[j] != -1:
+                prev = backtrack(j) # Recursive backtrack
+                if values[i] + prev[0] > take: # Update max sum
+                    take = values[i] + prev[0]
+                    indices = prev[1].copy()
+        
+        indices.append(i)
+        curr = (take, indices)
+
+        if not res or res[0] < take:  # Update max, that way we dont have to iterate at the end
+            res = curr
+
+        memo[i] = curr    # Store optimal sum at the current index for further computations
+        backtrack(i + 1)  # Process the next index
+        return memo
+    
+    backtrack(0)
+    return res[0], [val + 1 for val in res[1]] 
 
 if __name__ == '__main__':
     n, k = map(int, input().split())
