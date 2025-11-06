@@ -28,7 +28,7 @@ def program3(n: int, k: int, values: List[int]) -> Tuple[int, List[int]]:
         
         # Take current index
         curr.append(index)
-        backtrack(index + k, curr, curr_sum + values[index], k)
+        backtrack(index + k + 1, curr, curr_sum + values[index], k)
 
         # Pop previous and skip current index
         curr.pop()
@@ -37,6 +37,7 @@ def program3(n: int, k: int, values: List[int]) -> Tuple[int, List[int]]:
     backtrack(0, [], 0, k)
 
     return max_sum[0], [val + 1 for val in max_sum[1]]
+
 
 
 if __name__ == '__main__':
