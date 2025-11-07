@@ -29,14 +29,12 @@ def program4A(n: int, k: int, values: List[int]) -> Tuple[int, List[int]]:
         nonlocal res
         if i >= n:
             return 0
-        if memo[i] != -1: # Short circuit to return previous sum if already computed
-            return memo[i]
 
         take, indices = values[i], []
         for j in range(0, i - k + 1): # Loop through all previous computations to find max
             if memo[j] != -1:
-                prev = backtrack(j) # Recursive backtrack
-                if values[i] + prev[0] > take: # Update max sum
+                prev = memo[j]
+                if values[i] + prev[0] > take: # Update the current take of values
                     take = values[i] + prev[0]
                     indices = prev[1].copy()
         
@@ -48,7 +46,7 @@ def program4A(n: int, k: int, values: List[int]) -> Tuple[int, List[int]]:
 
         memo[i] = curr    # Store optimal sum at the current index for further computations
         backtrack(i + 1)  # Process the next index
-        return memo
+        return
     
     backtrack(0)
     return res[0], [val + 1 for val in res[1]] 
