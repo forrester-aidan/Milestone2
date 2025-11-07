@@ -31,7 +31,7 @@ def program4A(n: int, k: int, values: List[int]) -> Tuple[int, List[int]]:
             return 0
 
         take, indices = values[i], []
-        for j in range(0, i - k + 1): # Loop through all previous computations to find max
+        for j in range(0, i - k): # Loop through all previous computations to find max
             if memo[j] != -1:
                 prev = memo[j]
                 if values[i] + prev[0] > take: # Update the current take of values

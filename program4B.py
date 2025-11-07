@@ -28,7 +28,7 @@ def program4B(n: int, k: int, values: List[int]) -> Tuple[int, List[int]]:
         # If we're starting with the first index, this gets skipped always
         # If the max_sum (our greatest sum of previous values) is less than the currently processed previous max sum:
         #     Update max_sum, and grab a copy of the indexes that made that vault sum
-        for j in range(0, i - k + 1): 
+        for j in range(0, i - k): 
             if max_sum < opt[j][0]:
                 max_sum = opt[j][0]
                 max_indices = opt[j][1].copy()
