@@ -17,7 +17,9 @@ def program4B(n: int, k: int, values: List[int]) -> Tuple[int, List[int]]:
     ############################
     # Add you code here
     ############################
-
+    if n == 0:   # Deal w edge case
+        return 0, []
+    
     opt = [(0, [])] * n # DP table to store previous small subproblems
 
     for i in range(n): # For every value in original array
