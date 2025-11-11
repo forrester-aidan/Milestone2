@@ -39,7 +39,7 @@ def program4B(n: int, k: int, values: List[int]) -> Tuple[int, List[int]]:
         # Otherwise, add take the current vault, add the vaults value to the max_sum and index to max_indices.
         #     Store this at opt[i]
         res = 0
-        if opt[i - 1][0] >= values[i] + max_sum:
+        if i > 0 and opt[i - 1][0] >= values[i] + max_sum:
             res = (opt[i - 1][0], opt[i - 1][1])
         else:
             max_indices.append(i)
